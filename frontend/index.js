@@ -1,5 +1,15 @@
 let formDiv = document.getElementById("student-form")
+let  main = document.querySelector("#main")
 document.getElementById("new-student").addEventListener('click', displayStudentForm)
+
+async function renderStudents() { 
+    main.innerHTML = ''
+    const students = await apiService.fetchStudents()
+    students.map(indStudent => {
+        const student = new Student(indStudent)
+        student.renderStudent()
+    })   
+}
 
 function displayStudentForm(){
     let html = `
