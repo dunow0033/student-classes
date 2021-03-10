@@ -1,5 +1,7 @@
+const apiService = new ApiService()
 let formDiv = document.getElementById("student-form")
 let  main = document.querySelector("#main")
+document.getElementById("students").addEventListener('click', renderStudents)
 document.getElementById("new-student").addEventListener('click', displayStudentForm)
 
 async function renderStudents() { 

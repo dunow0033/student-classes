@@ -7,7 +7,7 @@ class Student {
 
     renderStudent(){
         main.innerHTML += `
-        <h2>${this.name}</h2>
+        <h3>${this.name}</h3>
         `
     }
 

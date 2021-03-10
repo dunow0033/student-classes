@@ -19,6 +19,8 @@ class ApiService {
             }
         }
 
-        let resp = await fetch(this.baseURL + '/students', configObj)
+        let resp = await fetch(this.baseURL + '/students', configObj);
+        let data = resp.json();
+        return data;
     }
 }

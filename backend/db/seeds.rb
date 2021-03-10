@@ -9,3 +9,7 @@
 10.times do
     Subject.create(name: Faker::Commerce.product_name, description: Faker::Lorem.sentence)
 end
+
+Student.create(name: "Daniel")
+Student.create(name: "Tony")
+Student.create(name: "Chris")
