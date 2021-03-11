@@ -1,4 +1,3 @@
 Rails.application.routes.draw do
-  resources :subjects, only: [ :index, :show ]
-  resources :students, only: [ :index ]
+  resources :students, only: [ :index, :show ]
 end
