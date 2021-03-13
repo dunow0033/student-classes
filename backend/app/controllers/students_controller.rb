@@ -7,5 +7,16 @@ class StudentsController < ApplicationController
     def show
       student = Student.find(params[:id])
       render json: student
-  end
+    end
+
+    def create
+      student = Student.create(name: params[:name])
+
+      if student.save
+        render json: student
+      else
+        render json: students
+      end
+    end
+
 end
