@@ -1,15 +1,13 @@
 class Student {
-    constructor(data){
-        this.id = data.id;
-        this.name = data.name;
-        this.age = data.age;
+    constructor(student){
+        //this.id = student.id;
+        this.name = student;
     }
 
-    renderStudent(){
-        main.innerHTML += `
-        <h3>${this.name}</h3>
-        `
-    }
-
-    
+    // function renderStudents(student){
+    //     return `<h2>${ student.name }</h2>
+    //         <input type="text" id="subject" placeholder="subject">
+    //         <input type="submit">
+    //         <button>x</button>`
+    //     }
 }
