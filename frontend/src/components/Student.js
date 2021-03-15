@@ -7,7 +7,7 @@ class Student {
     renderStudent(){
         return `
         <h2>${ this.name }</h2>
-        <button class="new-subject">Add New Class</button>
+        <button data-id=${this.id} class="new-subject">Add New Class</button>
         <button class="delete-btn">x</button>
         `
     }

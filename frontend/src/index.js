@@ -57,14 +57,13 @@ function submitStudent(data){
         <button class="delete-btn">x</button>
     `
     });
-
-    // document.querySelectorAll(".new-subject").forEach(btn => btn.addEventListener("click", newSubject));
-    // document.querySelectorAll(".delete-btn").forEach(btn => btn.addEventListener("click", deleteSubject));
 }
 
 init();
 
 function newSubject(e){
+    const id = e.target.dataset.id
+
     let html = `
     <form>
         <br>
@@ -75,13 +74,15 @@ function newSubject(e){
     studentsList.innerHTML = "";
     newStudentForm.innerHTML = "";
     studentsList.innerHTML += html;
+
+    document.querySelector('form').addEventListener('submit', createSubject(e, id))
 }
 
 function deleteSubject(e){
     console.log("delete")
 }
 
-function clearForm() {
+function clearStudentForm() {
     newStudentForm.innerHTML = ""
 }
 
@@ -93,5 +94,24 @@ function createStudent(e){
     let student = new Student(name);
 
     submitStudent(student);
-    clearForm()
+    clearStudentForm()
+}
+
+function createSubject(e, id){
+    e.preventDefault()
+
+    console.log(id)
+
+    const studentId = fetch(`http://localhost:3000/students/${id}`).then(resp => resp.json())
+
+    const name = { name: e.target.name.value, id: studentId }
+
+    let subject = new Subject(name);
+
+    submitSubject(student);
+    // //clearSubjectForm()
+}
+
+function submitSubject(student){
+    console.log("hello");
 }

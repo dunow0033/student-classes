@@ -18,5 +18,4 @@ class StudentsController < ApplicationController
         render json: students
       end
     end
-
 end
