@@ -1,23 +1,30 @@
-const studentsList = document.getElementById('students-list')
-let formDiv = document.getElementById('student-form')
-document.getElementById("new-student").addEventListener('click', displayStudentForm)
+let studentsList = document.querySelector('div#students-list')
+let newStudentForm = document.querySelector('div#student-form')
+let allStudents = document.querySelector('div#all-students')
+document.querySelector("#new-student").addEventListener('click', displayStudentForm)
 
-fetch('http://localhost:3000/students')
-.then(res => res.json())
-.then(data => renderStudents(data));
-    // data.forEach(studentObject => {
-    //     const newStudent = new Student(studentObject)
-    //     studentsList.innerHTML += newStudent.renderStudents(data));
-
-function renderStudents(students){
-    students.forEach(student => {
-        studentsList.innerHTML += `
-            <h2>${ student.name }</h2>
-            <button>Add New Class</button>
-            <button>x</button>
-        `
-    });
+const init = () => {
+    renderStudents();
 }
+
+const renderStudents = () => {
+    fetch('http://localhost:3000/students')
+        .then(res => res.json())
+        .then(data =>
+                data.forEach(student => {
+                    const newStudent = new Student(student);
+                    studentsList.innerHTML += newStudent.renderStudent();
+            }));
+
+            document
+                .querySelectorAll('.new-subject')
+                .forEach(btn => btn.addEventListener('click', newSubject));
+            document
+                .querySelectorAll('.delete-btn')
+                .forEach(btn => btn.addEventListener('click', deleteSubject));
+}
+
+document.querySelector("#all-students").addEventListener('click', renderStudents)
 
 function displayStudentForm(){
     let html = `
@@ -27,21 +34,8 @@ function displayStudentForm(){
         <input type="submit">
     </form>
     `
-    formDiv.innerHTML = html
+    newStudentForm.innerHTML = html
     document.querySelector('form').addEventListener('submit', createStudent)
-}
-
-function displaySubjectForm(){
-    let html = `
-    <form>
-        <br>
-        <input type="text" id="name" placeholder="Add Class"><br>
-        <input type="submit">
-    </form>
-    `
-    studentsList.innerHTML = "";
-    formDiv.innerHTML = "";
-    studentsList.innerHTML += html;
 }
 
 function submitStudent(data){
@@ -57,19 +51,44 @@ function submitStudent(data){
     .then(data => {
         studentsList.innerHTML += `
         <h2>${ data.name }</h2>
-        <button>Add New Class</button>
-        <button>x</button>
+        <button class="new-subject">Add New Class</button>
+        <button class="delete-btn">x</button>
     `
-    })
+    });
+
+    // document.querySelectorAll(".new-subject").forEach(btn => btn.addEventListener("click", newSubject));
+    // document.querySelectorAll(".delete-btn").forEach(btn => btn.addEventListener("click", deleteSubject));
+}
+
+init();
+
+function newSubject(e){
+    let html = `
+    <form>
+        <br>
+        <input type="text" id="name" placeholder="Add Class"><br>
+        <input type="submit">
+    </form>
+    `
+    studentsList.innerHTML = "";
+    newStudentForm.innerHTML = "";
+    studentsList.innerHTML += html;
+}
+
+function deleteSubject(e){
+    console.log("delete")
 }
 
 function clearForm() {
-    formDiv.innerHTML = ""
+    newStudentForm.innerHTML = ""
 }
 
 function createStudent(e){
     e.preventDefault()
-   let student = new Student(e.target.name.value);
+
+    const name = { name: e.target.name.value }
+
+    let student = new Student(name);
 
     submitStudent(student);
     clearForm()
