@@ -8,13 +8,14 @@ const init = () => {
 }
 
 const renderStudents = () => {
+    studentsList.innerHTML = "";
     fetch('http://localhost:3000/students')
         .then(res => res.json())
-        .then(data =>
+        .then(data => {
                 data.forEach(student => {
                     const newStudent = new Student(student);
                     studentsList.innerHTML += newStudent.renderStudent();
-            }));
+            });
 
             document
                 .querySelectorAll('.new-subject')
@@ -22,6 +23,7 @@ const renderStudents = () => {
             document
                 .querySelectorAll('.delete-btn')
                 .forEach(btn => btn.addEventListener('click', deleteSubject));
+        });
 }
 
 document.querySelector("#all-students").addEventListener('click', renderStudents)
