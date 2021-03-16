@@ -96,7 +96,11 @@ function newSubject(e){
 
     const nameSpot = document.querySelector("p#name")
 
-    createSubject(id, nameSpot)
+    fetch(`http://localhost:3000/students/${id}`)
+        .then(resp => resp.json())
+        .then(data => {
+            nameSpot.innerHTML += `Add a new class for ${ data.name }`
+        })
     //document.querySelector('form#subjectForm').addEventListener('submit', createSubject(e, id, nameSpot))
 
     document.querySelector('form#subjectForm').addEventListener('submit', function(e){
@@ -106,22 +110,12 @@ function newSubject(e){
     })
 }
 
-function createSubject(id, nameSpot){
-    //e.preventDefault()
-
-    fetch(`http://localhost:3000/students/${id}`)
-        .then(resp => resp.json())
-        .then(data => {
-            nameSpot.innerHTML += `Add a new class for ${ data.name }`
-        })
-
     // const name = { name: subjectName, studentId: id }
 
     // let subject = new Subject(name);
 
     // submitSubject(subject);
     // //clearSubjectForm()
-}
 
 // async createNewSubject(subject){
 //     let configObj = {
