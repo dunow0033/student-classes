@@ -2,7 +2,7 @@ class Subject {
     constructor(subject){
         this.id = subject.id;
         this.name = subject.name;
-        this.student
+        this.student_id = subject.studentId;
     }
 
     // render(){

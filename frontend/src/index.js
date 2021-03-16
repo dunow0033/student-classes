@@ -61,23 +61,6 @@ function submitStudent(data){
 
 init();
 
-function newSubject(e){
-    const id = e.target.dataset.id
-
-    let html = `
-    <form>
-        <br>
-        <input type="text" id="name" placeholder="Add Class"><br>
-        <input type="submit">
-    </form>
-    `
-    studentsList.innerHTML = "";
-    newStudentForm.innerHTML = "";
-    studentsList.innerHTML += html;
-
-    document.querySelector('form').addEventListener('submit', createSubject(e, id))
-}
-
 function deleteSubject(e){
     console.log("delete")
 }
@@ -97,21 +80,63 @@ function createStudent(e){
     clearStudentForm()
 }
 
-function createSubject(e, id){
-    e.preventDefault()
+function newSubject(e){
+    const id = e.target.dataset.id
 
-    console.log(id)
+    let html = `
+    <form id="subjectForm">
+        <p id="name"></p>
+        <input type="text" id="subject" placeholder="Add Class"><br>
+        <input type="submit">
+    </form>
+    `
+    studentsList.innerHTML = "";
+    newStudentForm.innerHTML = "";
+    studentsList.innerHTML += html;
 
-    const studentId = fetch(`http://localhost:3000/students/${id}`).then(resp => resp.json())
+    const nameSpot = document.querySelector("p#name")
 
-    const name = { name: e.target.name.value, id: studentId }
+    createSubject(id, nameSpot)
+    //document.querySelector('form#subjectForm').addEventListener('submit', createSubject(e, id, nameSpot))
 
-    let subject = new Subject(name);
+    document.querySelector('form#subjectForm').addEventListener('submit', function(e){
+        e.preventDefault()
 
-    submitSubject(student);
+        console.log(e.target.querySelector("#subject").value)
+    })
+}
+
+function createSubject(id, nameSpot){
+    //e.preventDefault()
+
+    fetch(`http://localhost:3000/students/${id}`)
+        .then(resp => resp.json())
+        .then(data => {
+            nameSpot.innerHTML += `Add a new class for ${ data.name }`
+        })
+
+    // const name = { name: subjectName, studentId: id }
+
+    // let subject = new Subject(name);
+
+    // submitSubject(subject);
     // //clearSubjectForm()
 }
 
-function submitSubject(student){
-    console.log("hello");
+// async createNewSubject(subject){
+//     let configObj = {
+//         method: 'POST',
+//         body: JSON.stringify(subject),
+//         headers: {
+//             'Content-type': 'application/json',
+//             'Accept': 'application/json'
+//         }
+//     }
+//     let resp = await fetch(this.baseURL + '/subjectss', configObj)
+//     let data = resp.json()
+//     return data
+// }
+
+function submitSubject(subject){
+    console.log(subject);
 }
