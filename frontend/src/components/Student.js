@@ -7,7 +7,7 @@ class Student {
     renderStudent(){
         return `
         <h2>${ this.name }</h2>
-        <ul data-subject="user-subject-${this.id}" id="user-subject-${this.id}"></ul>
+        <ul data-subject="${this.id}" id="user-subject-${this.id}"></ul>
         <button data-id=${this.id} class="new-subject">Add New Class</button>
         <button class="delete-btn">x</button>
         `

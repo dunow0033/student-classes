@@ -4,6 +4,7 @@ let allStudents = document.querySelector('div#all-students')
 document.querySelector("#new-student").addEventListener('click', displayStudentForm)
 let student_id = null
 let subject_spot = null
+let list = null
 
 const init = () => {
     renderStudents();
@@ -70,12 +71,19 @@ function submitStudent(data){
         <button class="new-subject">Add New Class</button>
         <button class="delete-btn">x</button>
     `
+
+    document
+        .querySelectorAll('.new-subject')
+        .forEach(btn => btn.addEventListener('click', newSubject));
+    document
+        .querySelectorAll('.delete-btn')
+        .forEach(btn => btn.addEventListener('click', deleteSubject));
     });
 }
 
 function newSubject(e){
     student_id = e.target.dataset.id
-    subject_spot = e.target.dataset.subject
+    list = document.getElementById(`user-subject-"${student_id}"`)
 
     let html = `
     <form>
@@ -122,6 +130,8 @@ function newSubject(e){
         renderStudents()
         
         let list = document.getElementById(`user-subject-"${student_id}"`)
+
+        console.log(list)
         list.innerHTML = e.target.subject.value
         //console.log(student_id)
     })
