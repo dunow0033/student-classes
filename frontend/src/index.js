@@ -3,7 +3,6 @@ let newStudentForm = document.querySelector('div#student-form')
 let allStudents = document.querySelector('div#all-students')
 document.querySelector("#new-student").addEventListener('click', displayStudentForm)
 let student_id = null
-let list = null
 let students = []
 
 const init = () => {
@@ -87,7 +86,6 @@ function submitStudent(data){
 
 function newSubject(e){
     student_id = e.target.dataset.id
-    list = document.getElementById(`user-subject-"${student_id}"`)
 
     let html = `
     <form>
@@ -116,8 +114,6 @@ function newSubject(e){
 
         e.preventDefault()
 
-        //console.log(students)
-
         const name = {
                         name: e.target.subject.value,
                         student_id
@@ -131,14 +127,14 @@ function newSubject(e){
                 body: JSON.stringify({name}),
             })
             .then(response => response.json())
-            .then(data => {
-                let student = students.find(student => student.id == student_id)
+            .then(subject => {
+                //let student = students.find(student => student.id == student_id)
                 students.forEach(student => {
                     if(student.id == student_id){
-                        student.subjects.push(data)
+                        student.subjects.push(subject)
                     }
                 })
-                console.log('Success:', data);
+                console.log('Success:', subject);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -148,27 +144,24 @@ function newSubject(e){
     })
 }
 
-function createSubject(e, id){
-    console.log("hi")
-}
-
 function deleteSubject(e){
-    console.log("delete")
+    subjectId = e.target.dataset.id
+   
+
+    fetch(`http://localhost:3000/subjects/${subjectId}`, {
+        method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(subject => students.forEach(student => {
+            if(student.id == student_id){
+                console.log(student.subjects)
+            }
+        }))
+            //students[0].subjects.filter(subject => subject.id == student_id.subject.id))
 }
 
 function clearStudentForm() {
     newStudentForm.innerHTML = ""
-}
-
-    // const name = { name: subjectName, studentId: id }
-
-    // let subject = new Subject(name);
-
-    // submitSubject(subject);
-    // //clearSubjectForm()
-
-function submitSubject(subject){
-    console.log(subject);
 }
 
 init();

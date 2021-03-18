@@ -18,6 +18,10 @@ class SubjectsController < ApplicationController
     end
 
     def destroy
-        binding.pry
+        subject = Subject.find(params[:id])
+
+        if subject.destroy
+            render json: subject
+        end
     end
 end
