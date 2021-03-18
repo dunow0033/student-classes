@@ -18,12 +18,4 @@ class StudentsController < ApplicationController
         render json: students
       end
     end
-
-    def destroy
-      subject = Subject.find(name: params[:name][:name], student_id: params[:name][:student_id])
-  
-      if item.destroy
-        render json: { id: subject.id }
-      end
-    end
 end
