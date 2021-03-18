@@ -5,11 +5,29 @@ class Subject {
         this.student_id = subject.studentId;
     }
 
-    // render(){
-    //     return `
-    //     <h2>${ this.name }</h2>
-    //     <button class="new-subject">Add New Class</button>
-    //     <button class="delete-btn">x</button>
-    //     `
+    // newSubject(e){    
+    //     document.querySelector('form').addEventListener('submit', function(e){
+    //         e.preventDefault()
+    
+    //         console.log(e.target.dataset.id)
+    
+    //         let newSubject = {
+    //             name : e.target.querySelector("#subject").value,
+    //             //student_id : student_id
+    //         }
+    
+    //         let subject = new Subject(newSubject)
+    
+    //         fetch('http://localhost:3000/subjects', {
+    //             method: "POST",
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'Accept': 'application/json'
+    //             },
+    //             body: JSON.stringify(subject)
+    //         })
+    //         .then((res) => res.json())
+    //         .then(data => console.log(data));
+    //     })
     // }
 }

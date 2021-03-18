@@ -10,12 +10,12 @@ class SubjectsController < ApplicationController
     end
 
     def create
-        subject = Subject.create(name: params[:name])
+        subject = Subject.create(name: params[:name], student_id: params[:student_id])
   
-        if student.save
-          render json: student
+        if subject.save
+          render json: subject
         else
-          render json: students
+          render json: subjects
         end
     end
 
