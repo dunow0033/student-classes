@@ -4,6 +4,7 @@ let allStudents = document.querySelector('div#all-students')
 document.querySelector("#new-student").addEventListener('click', displayStudentForm)
 let student_id = null
 let list = null
+let students = []
 
 const init = () => {
     renderStudents();
@@ -18,6 +19,7 @@ const renderStudents = () => {
                 data.forEach(student => {
                     const newStudent = new Student(student);
                     studentsList.innerHTML += newStudent.renderStudent();
+                    students.push(newStudent)
             });
 
             document
@@ -90,7 +92,7 @@ function newSubject(e){
     let html = `
     <form>
         <p id="subject-name"></p>
-        <input type="text" id="subject" placeholder="Add Class"><br>
+        <input type="text" id="subject" name="subject" placeholder="Add Class"><br>
         <input type="submit">
     </form>
     `
@@ -114,17 +116,28 @@ function newSubject(e){
 
         e.preventDefault()
 
-        const data
+        //console.log(students)
+
+        const name = {
+                        name: e.target.subject.value,
+                        student_id
+                    }
 
         fetch(`http://localhost:3000/subjects/`, {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
             },
-                body: JSON.stringify(data),
+                body: JSON.stringify({name}),
             })
             .then(response => response.json())
             .then(data => {
+                let student = students.find(student => student.id == student_id)
+                students.forEach(student => {
+                    if(student.id == student_id){
+                        student.subjects.push(data)
+                    }
+                })
                 console.log('Success:', data);
             })
             .catch((error) => {
@@ -132,11 +145,6 @@ function newSubject(e){
         });
 
         renderStudents()
-        
-        let list = document.getElementById(`user-subject-"${student_id}"`)
-
-        console.log(e.target.subject.value)
-        list.innerHTML = e.target.subject.value
     })
 }
 
