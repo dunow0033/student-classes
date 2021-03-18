@@ -10,7 +10,7 @@ class StudentsController < ApplicationController
     end
 
     def create
-      student = Student.create(name: params[:name])
+      student = Student.create(name: params[:name], subjects: params[:subjects])
 
       if student.save
         render json: student

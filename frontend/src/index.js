@@ -3,7 +3,6 @@ let newStudentForm = document.querySelector('div#student-form')
 let allStudents = document.querySelector('div#all-students')
 document.querySelector("#new-student").addEventListener('click', displayStudentForm)
 let student_id = null
-let subject_spot = null
 let list = null
 
 const init = () => {
@@ -47,7 +46,10 @@ function displayStudentForm(){
 function createStudent(e){
     e.preventDefault()
 
-    const name = { name: e.target.name.value }
+    const name = { 
+                    name: e.target.name.value,
+                    subjects: [] 
+                 }
 
     let student = new Student(name);
 
@@ -112,28 +114,29 @@ function newSubject(e){
 
         e.preventDefault()
 
-        // fetch(`http://localhost:3000/subjects/${student_id}`, {
-        //     method: 'POST', // or 'PUT'
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //         body: JSON.stringify(data),
-        //     })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log('Success:', data);
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error:', error);
-        // });
+        const data
+
+        fetch(`http://localhost:3000/subjects/`, {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
 
         renderStudents()
         
         let list = document.getElementById(`user-subject-"${student_id}"`)
 
-        console.log(list)
+        console.log(e.target.subject.value)
         list.innerHTML = e.target.subject.value
-        //console.log(student_id)
     })
 }
 
