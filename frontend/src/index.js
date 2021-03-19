@@ -107,11 +107,6 @@ function newSubject(e){
     })
 
     document.querySelector('form').addEventListener('submit', function(e){
-        //create a new Subject object and attach it to the correct student
-        //use fetch post to send new Subject to the Rails API backend
-        //put new subject on the DOM on the correct student's box
-        //use getElementById to find the form element
-
         e.preventDefault()
 
         const name = {
@@ -128,13 +123,14 @@ function newSubject(e){
             })
             .then(response => response.json())
             .then(subject => {
-                //let student = students.find(student => student.id == student_id)
+                let student = students.find(student => student.id == student_id)
+                
                 students.forEach(student => {
                     if(student.id == student_id){
                         student.subjects.push(subject)
                     }
                 })
-                console.log('Success:', subject);
+                console.log(students);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -146,17 +142,17 @@ function newSubject(e){
 
 function deleteSubject(e){
     subjectId = e.target.dataset.id
-   
 
     fetch(`http://localhost:3000/subjects/${subjectId}`, {
         method: 'DELETE',
         })
         .then(response => response.json())
-        .then(subject => students.forEach(student => {
-            if(student.id == student_id){
-                console.log(student.subjects)
-            }
-        }))
+        .then(subject => renderStudents())
+
+            //     students.forEach(student => {
+            // if(student.id == student_id){
+            //     console.log(student.subjects)
+        
             //students[0].subjects.filter(subject => subject.id == student_id.subject.id))
 }
 
