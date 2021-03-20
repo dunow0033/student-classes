@@ -2,8 +2,16 @@
     <head>
         <title>Student Classes</title>
         <style>
+          #new-student {
+            width: 50%;
+            float: left;
+          }
+          #new-class {
+            width: 50%;
+            float: left;
+          }
           #students-list {
-            width: 40%;
+            width: 100%;
             float: left;
           }
         </style>
@@ -12,9 +20,20 @@
 
     <h1>Student Classes</h1>
     
-      <button id="all-students">All Students</button>
-      <button id="new-student">Create a New Student</button>
-      <div id="student-form"></div>
+      <div>
+        <form id="new-student">
+          <h3>Add New Student</h3>
+          <input type="text" id="name" name="name" placeholder="Student Name"><br>
+          <input type="submit">
+        </form>
+      </div>
+      <div>
+        <form id="new-class">
+          <p id="subject-name"></p>
+          <input type="text" id="subject" name="subject" placeholder="Add Class"><br>
+          <input type="submit">
+        </form>
+      </div>
 
       <div id='students-list'>
           <h2>
