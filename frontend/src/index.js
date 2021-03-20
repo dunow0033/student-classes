@@ -127,25 +127,24 @@ function newSubject(e){
                         student.subjects.push(subject)
                     }
                 })
-                //document.getElementById(`${student.id}`).appendChild(`<li><a data-id=${subject.id} href="#">${subject.name}</a></li><button data-id=${subject.id} class="delete-btn">x</button><br>`)
             })
         });
     }
 
-// function deleteSubject(e){
-//     subjectId = e.target.dataset.id
+function deleteSubject(e){
+    subjectId = e.target.dataset.id
 
-//     fetch(`http://localhost:3000/subjects/${subjectId}`, {
-//         method: 'DELETE',
-//         })
-//         .then(response => response.json())
-//         .then(subject => renderStudents())
-
+    fetch(`http://localhost:3000/subjects/${subjectId}`, {
+        method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(subject => console.log(subject))
+        //.then(subject => renderStudents())
 //             //     students.forEach(student => {
 //             // if(student.id == student_id){
 //             //     console.log(student.subjects)
         
 //             //students[0].subjects.filter(subject => subject.id == student_id.subject.id))
-// }
+}
 
 init();
