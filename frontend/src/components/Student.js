@@ -16,6 +16,6 @@ class Student {
     }
 
     renderSubjects(){
-        return this.subjects.map(element => `<li>${element.name}</li><button data-id=${element.id} class="delete-btn">x</button><br>` );
+        return this.subjects.map(element => `<li>${element.name} <button data-id=${element.id} class="delete-btn">x</button></li>` ).join(" ");
     }
 }

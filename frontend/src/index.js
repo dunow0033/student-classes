@@ -139,7 +139,7 @@ function deleteSubject(e){
         })
         .then(response => response.json())
         .then(subject => console.log(subject))
-        //.then(subject => renderStudents())
+        .then((subject) => e.target.parentElement.remove());
 //             //     students.forEach(student => {
 //             // if(student.id == student_id){
 //             //     console.log(student.subjects)
