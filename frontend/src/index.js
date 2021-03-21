@@ -52,12 +52,6 @@ function createStudent(e){
         newStudent = new Student(student);
         studentsList.innerHTML += newStudent.renderStudent();
 
-        // studentsList.innerHTML += `
-        // <h2>${ student.name }</h2>
-        // <button data-id=${ this.id } class="new-subject">Add New Class</button>
-        // <button class="delete-btn">x</button>
-        // `
-
     document
         .querySelectorAll('.new-subject')
         .forEach(btn => btn.addEventListener('click', newSubject));
@@ -66,34 +60,6 @@ function createStudent(e){
         .forEach(btn => btn.addEventListener('click', deleteSubject));
     });
 }
-
-// function submitStudent(e, data){
-//     let student_id = e.target.dataset.id
-
-//     fetch('http://localhost:3000/students', {
-//         method: "POST",
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     })
-//     .then((res) => res.json())
-//     .then(student => {
-//         studentsList.innerHTML += `
-//         <h2><a data-id=${ this.id } href="#">${ student.name }</a></h2>
-//         <button data-id=${ this.id } class="new-subject">Add New Class</button>
-//         <button class="delete-btn">x</button>
-//     `
-
-//     document
-//         .querySelectorAll('.new-subject')
-//         .forEach(btn => btn.addEventListener('click', newSubject));
-//     document
-//         .querySelectorAll('.delete-btn')
-//         .forEach(btn => btn.addEventListener('click', deleteSubject));
-//     });
-// }
 
 function newSubject(e){
     student_id = e.target.dataset.id
@@ -108,7 +74,7 @@ function newSubject(e){
     })
 
     document.querySelector('#new-class').addEventListener('submit', function(e){
-        const name = {
+        let name = {
                         name: e.target.subject.value,
                         student_id
                     }
@@ -126,7 +92,8 @@ function newSubject(e){
                     if(student.id == student_id){
                         student.subjects.push(subject)
                     }
-                })
+                   }
+                )
             })
         });
     }

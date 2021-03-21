@@ -7,7 +7,7 @@ class Student {
 
     renderStudent(){
         return `
-        <h2>${ this.name }</h2>
+        <h2><a data-id=${this.id} href="#"> ${ this.name } </a></h2>
         <ul style="list-style-type: none;">
             ${this.renderSubjects()}
         </ul>
@@ -16,6 +16,6 @@ class Student {
     }
 
     renderSubjects(){
-        return this.subjects.map(element => `<li>${element.name} <button data-id=${element.id} class="delete-btn">x</button></li>` ).join(" ");
+        return this.subjects.map(element => `<li><a data-id=${element.id} href="#"> ${element.name} </a><button data-id=${element.id} class="delete-btn">x</button></li>` ).join(" ");
     }
 }
