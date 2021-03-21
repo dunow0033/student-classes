@@ -1,6 +1,7 @@
 let studentsList = document.querySelector('div#students-list')
 let newStudentForm = document.querySelector('div#student-form')
 let allStudents = document.querySelector('div#all-students')
+let details = document.querySelector('#details')
 let newStudent = null
 
 let student_id = null
@@ -23,6 +24,9 @@ const renderStudents = () => {
             document
                 .querySelectorAll('.new-subject')
                 .forEach(btn => btn.addEventListener('click', newSubject));
+            document
+                .querySelectorAll('.student-link')
+                .forEach(btn => btn.addEventListener('click', showStudentDetails));
             document
                 .querySelectorAll('.delete-btn')
                 .forEach(btn => btn.addEventListener('click', deleteSubject));
@@ -107,11 +111,17 @@ function deleteSubject(e){
         .then(response => response.json())
         .then(subject => console.log(subject))
         .then((subject) => e.target.parentElement.remove());
-//             //     students.forEach(student => {
-//             // if(student.id == student_id){
-//             //     console.log(student.subjects)
-        
-//             //students[0].subjects.filter(subject => subject.id == student_id.subject.id))
+}
+
+function showStudentDetails(e){
+    const { id } = e.target.dataset;
+    console.log(`Item ${id} was clicked`);
+    fetch(`http://localhost:3000/students/${id}`)
+        .then(res => res.json())
+        .then(item => {
+            const student = new Student(item);
+            details.innerHTML = student.renderStudentDetails();
+        })
 }
 
 init();
