@@ -1,4 +1,4 @@
 class StudentSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :age, :about
   has_many :subjects
 end

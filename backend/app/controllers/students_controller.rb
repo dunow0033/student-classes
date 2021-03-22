@@ -10,12 +10,17 @@ class StudentsController < ApplicationController
     end
 
     def create
-      student = Student.create(name: params[:name], subjects: params[:subjects])
+      student = Student.new(student_params)
 
       if student.save
         render json: student
       else
         render json: students
       end
+    end
+
+    private
+    def student_params
+      params.require(:student).permit(:name, :age, :about, :subjects)
     end
 end

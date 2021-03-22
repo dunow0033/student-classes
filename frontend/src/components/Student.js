@@ -2,6 +2,8 @@ class Student {
     constructor(student){
         this.id = student.id;
         this.name = student.name;
+        this.age = student.age;
+        this.about = student.about;
         this.subjects = student.subjects;
     }
 
@@ -12,6 +14,14 @@ class Student {
             ${this.renderSubjects()}
         </ul>
         <button data-id=${this.id} class="new-subject">Add New Class</button>
+        `
+    }
+
+    renderStudentDetails(){
+        return `
+        <h2>${ this.name }</h2>
+        <h4>Age: ${ this.age }</h4>
+        <h4>About: ${ this.about }</h4>
         `
     }
 

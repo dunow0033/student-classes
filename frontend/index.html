@@ -31,13 +31,15 @@
       <div>
         <form id="new-student">
           <h3>Add New Student</h3>
-          <input type="text" id="name" name="name" placeholder="Student Name"><br>
+          <input type="text" id="name" name="student[name]" placeholder="Student Name"><br>
+          <input type="text" id="age" name="student[age]" placeholder="Student Age"><br>
+          <textarea rows="4" cols="30" name="student[about]" id="about" placeholder="Tell Us About Yourself..."></textarea><br>
           <input type="submit">
         </form>
       </div>
       <div>
         <form id="new-class">
-          <p id="subject-name"></p>
+          <h3 id="subject-name">Click a Student's 'Add New Class' Button!!</h3>
           <input type="text" id="subject" name="subject" placeholder="Add Class"><br>
           <input type="submit">
         </form>
@@ -51,10 +53,11 @@
           </h2>
         </div>
 
-        <div id='details'>
+        <div>
           <h2>
             Details
           </h2>
+          <p id='details'></p>
         </div>
 
       </div>

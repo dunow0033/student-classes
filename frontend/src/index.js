@@ -37,10 +37,10 @@ document.querySelector("#new-student").addEventListener('submit', createStudent)
 function createStudent(e){
     const name = { 
                     name: e.target.name.value,
+                    age: e.target.age.value,
+                    about: e.target.about.value,
                     subjects: [] 
                  }
-
-    let student = new Student(name);
 
     fetch('http://localhost:3000/students', {
         method: "POST",
@@ -48,14 +48,13 @@ function createStudent(e){
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify(student)
+        body: JSON.stringify(name)
     })
     .then((res) => res.json())
     .then(student => {
-
         newStudent = new Student(student);
         studentsList.innerHTML += newStudent.renderStudent();
-
+        
     document
         .querySelectorAll('.new-subject')
         .forEach(btn => btn.addEventListener('click', newSubject));
@@ -73,8 +72,7 @@ function newSubject(e){
     fetch(`http://localhost:3000/students/${student_id}`)
         .then(resp => resp.json())
         .then(data => {
-            nameSpot.innerHTML = ""
-            nameSpot.innerHTML += `<h3>Add New Class For ${ data.name }</h3>`
+            nameSpot.innerHTML = `<h3>Add New Class For ${ data.name }</h3>`
     })
 
     document.querySelector('#new-class').addEventListener('submit', function(e){
@@ -109,17 +107,16 @@ function deleteSubject(e){
         method: 'DELETE',
         })
         .then(response => response.json())
-        .then(subject => console.log(subject))
         .then((subject) => e.target.parentElement.remove());
 }
 
 function showStudentDetails(e){
     const { id } = e.target.dataset;
-    console.log(`Item ${id} was clicked`);
+
     fetch(`http://localhost:3000/students/${id}`)
         .then(res => res.json())
-        .then(item => {
-            const student = new Student(item);
+        .then(name => {
+            const student = new Student(name);
             details.innerHTML = student.renderStudentDetails();
         })
 }
