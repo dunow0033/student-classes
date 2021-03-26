@@ -27,6 +27,6 @@ class Student {
 
     renderSubjects(){
         //return this.subjects.map(element => `<li class="subject-link"><a data-id=${element.id} href="#"> ${element.name} </a><button data-id=${element.id} class="delete-btn">x</button></li>` ).join(" ");
-        return this.subjects.map(element => `<li class="subject-link"> <span contentEditable="true">${element.name}</span><button data-id=${element.id} class="delete-btn">x</button></li>` ).join(" ");
+        return this.subjects.map(element => `<li class="subject-link"> <span data-id=${element.id} class="edit-link" contentEditable="true">${element.name}</span><button data-id=${element.id} class="delete-btn">x</button></li>` ).join(" ");
     }
 }
