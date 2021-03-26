@@ -13,7 +13,9 @@ class SubjectsController < ApplicationController
         subject = Subject.create(name: params[:name][:name], student_id: params[:name][:student_id])
   
         if subject.save
-          render json: subject
+            render json: subject
+        else
+            render json: subject, status: 500
         end
     end
 

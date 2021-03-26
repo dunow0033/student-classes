@@ -81,12 +81,14 @@ function newSubject(e){
                         student_id
                     }
 
+        const subject = new Subject({name})
+
         fetch(`http://localhost:3000/subjects/`, {
             method: 'POST', // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
             },
-                body: JSON.stringify({name}),
+                body: JSON.stringify(subject),
             })
             .then(response => response.json())
             .then(subject => {
