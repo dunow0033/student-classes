@@ -5,6 +5,13 @@ class Subject {
         this.student_id = subject.studentId;
     }
 
+    renderSubjectDetails(){
+        return `
+        <h2>${ this.name }</h2>
+        <h4>About: ${ this.about }</h4>
+        `
+    }
+
     // newSubject(e){    
     //     document.querySelector('form').addEventListener('submit', function(e){
     //         e.preventDefault()

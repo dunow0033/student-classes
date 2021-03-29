@@ -28,6 +28,9 @@ const renderStudents = () => {
                 .querySelectorAll('.student-link')
                 .forEach(btn => btn.addEventListener('click', showStudentDetails));
             document
+                .querySelectorAll('.subject-link')
+                .forEach(btn => btn.addEventListener('click', showSubjectDetails));
+            document
                 .querySelectorAll('.delete-btn')
                 .forEach(btn => btn.addEventListener('click', deleteSubject));
         });
@@ -58,9 +61,9 @@ function createStudent(e){
     document
         .querySelectorAll('.new-subject')
         .forEach(btn => btn.addEventListener('click', newSubject));
-    document
-        .querySelectorAll('.edit-link')
-        .forEach(btn => btn.addEventListener('click', editSubject));
+    // document
+    //     .querySelectorAll('.edit')
+    //     .forEach(btn => btn.addEventListener('click', editSubject));
     document
         .querySelectorAll('.delete-btn')
         .forEach(btn => btn.addEventListener('click', deleteSubject));
@@ -81,6 +84,7 @@ function newSubject(e){
     document.querySelector('#new-class').addEventListener('submit', function(e){
         let name = {
                         name: e.target.subject.value,
+                        about: e.target.about.value,
                         student_id
                     }
 
@@ -105,41 +109,40 @@ function newSubject(e){
         });
     }
 
-// function editSubject(e){
-//         subject_id = e.target.dataset.id
+//function editSubject(e){
+        //subject_id = e.target.dataset.id
     
-//         fetch(`http://localhost:3000/subjects/${subject_id}`)
-//             .then(resp => resp.json())
-//             .then(data => {
-//                 nameSpot.innerHTML = `<h3>Add New Class For ${ data.name }</h3>`
-//         })
+        // fetch(`http://localhost:3000/subjects/${subject_id}`)
+        //     .then(resp => resp.json())
+        //     .then(data => {
+        //         console.log(data)
+        // })
     
-//         document.querySelector('#new-class').addEventListener('submit', function(e){
-//             let name = {
-//                             name: e.target.subject.value,
-//                             student_id
-//                         }
+        // document.querySelector('#new-class').addEventListener('submit', function(e){
+        //     let name = {
+        //                     name: e.target.subject.value,
+        //                     student_id
+        //                 }
     
-//             const subject = new Subject({name})
+        //     const subject = new Subject({name})
     
-//             fetch(`http://localhost:3000/subjects/`, {
-//                 method: 'POST', // or 'PUT'
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                     body: JSON.stringify(subject),
-//                 })
-//                 .then(response => response.json())
-//                 .then(subject => {
-//                     students.forEach(student => {
-//                         if(student.id == student_id){
-//                             student.subjects.push(subject)
-//                         }
-//                        }
-//                     )
-//                 })
-//             });
-//         }
+        //     fetch(`http://localhost:3000/subjects/`, {
+        //         method: 'POST', // or 'PUT'
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //             body: JSON.stringify(subject),
+        //         })
+        //         .then(response => response.json())
+        //         .then(subject => {
+        //             students.forEach(student => {
+        //                 if(student.id == student_id){
+        //                     student.subjects.push(subject)
+        //                 }
+        //                })
+        //         })
+        // });
+}
 
 function deleteSubject(e){
     subjectId = e.target.dataset.id
@@ -161,5 +164,16 @@ function showStudentDetails(e){
             details.innerHTML = student.renderStudentDetails();
         })
 }
+
+// function showSubjectDetails(e){
+//     subjectId = e.target.dataset.id;
+
+//     fetch(`http://localhost:3000/subjects/${subjectId}`)
+//         .then(res => res.json())
+//         .then(name => {
+//             const subject = new Subject(name);
+//             details.innerHTML = subject.renderStudentDetails();
+//         })
+// }
 
 init();
